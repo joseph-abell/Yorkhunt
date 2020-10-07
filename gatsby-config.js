@@ -23,6 +23,13 @@ module.exports = {
       },
     },
     {
+        resolve: 'gatsby-source-filesystem',
+        options: {
+          path: `${__dirname}/src/maps`,
+          name: 'maps',
+        },
+      },
+    {
       resolve: 'gatsby-source-filesystem',
       options: {
         path: `${__dirname}/src/img`,

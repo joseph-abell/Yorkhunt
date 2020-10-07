@@ -1,11 +1,12 @@
 import React from 'react'
 import PropTypes from 'prop-types'
-import { graphql } from 'gatsby'
+import { graphql, Link } from 'gatsby'
 
 import Layout from '../components/Layout'
 
 export const IndexPageTemplate = ({
   mainpitch,
+  maps
 }) => (
   <main>
     <section className="section section--gradient">
@@ -21,6 +22,19 @@ export const IndexPageTemplate = ({
                   <div className="tile">
                     <h3 className="subtitle">{mainpitch.description}</h3>
                   </div>
+                  {maps && (
+                    <div className="tile">
+                      <ul>
+                        {maps.map(m => (
+                          <li key={m.slug}>
+                            <Link to={m.slug}>
+                              {m.title}
+                            </Link>
+                          </li>
+                        ))}
+                      </ul>
+                    </div>
+                  )}
                 </div>
               </div>
             </div>
@@ -37,11 +51,13 @@ IndexPageTemplate.propTypes = {
 
 const IndexPage = ({ data }) => {
   const { frontmatter } = data.markdownRemark
+  const maps = data.maps.edges.map(m => ({ slug: m.node.fields.slug, lat: m.node.frontmatter.lat, lng: m.node.frontmatter.lng, title: m.node.frontmatter.title }));
 
   return (
     <Layout>
       <IndexPageTemplate
         mainpitch={frontmatter.mainpitch}
+        maps={maps}
       />
     </Layout>
   )
@@ -52,6 +68,7 @@ IndexPage.propTypes = {
     markdownRemark: PropTypes.shape({
       frontmatter: PropTypes.object,
     }),
+    maps: PropTypes.array
   }),
 }
 
@@ -64,6 +81,21 @@ export const pageQuery = graphql`
         mainpitch {
           title
           description
+        }
+      }
+    }
+
+    maps: allMarkdownRemark(filter: {frontmatter: {templateKey: {eq: "map-page"}}}) {
+      edges {
+        node {
+          frontmatter {
+            lat
+            lng
+            title
+          }
+          fields {
+            slug
+          }
         }
       }
     }
