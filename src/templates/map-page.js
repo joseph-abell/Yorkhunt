@@ -45,7 +45,7 @@ MapPageTemplate.propTypes = {
 
 const MapPage = ({ data }) => {
   const { frontmatter } = data.markdownRemark
-    console.log(frontmatter)
+
   return (
     <Layout>
       <MapPageTemplate
