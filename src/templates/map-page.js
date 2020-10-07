@@ -17,19 +17,27 @@ export const MapPageTemplate = ({
   lat,
   lng,
   zoom,
+  title,
 }) => (
   <main>
-    <section className="section section--gradient">
+    <section className="section">
       <div className="container">
-        <MyMapComponent
-          lat={lat}
-          lng={lng}
-          zoom={zoom}
-          googleMapURL='https://maps.googleapis.com/maps/api/js?key=AIzaSyBoJCzx8150auuR_Ffkh7qr43e-2hRWg0A'
-          loadingElement={<div style={{ height: `100%` }} />}
-          containerElement={<div style={{ height: `400px` }} />}
-          mapElement={<div style={{ height: `100%` }} />}
-        />
+        <div className="content">
+          <div className="tile">
+            <h1 className="title">{title}</h1>
+          </div>
+          <div className="tile">
+            <MyMapComponent
+              lat={lat}
+              lng={lng}
+              zoom={zoom}
+              googleMapURL='https://maps.googleapis.com/maps/api/js?key=AIzaSyBoJCzx8150auuR_Ffkh7qr43e-2hRWg0A'
+              loadingElement={<div style={{ height: `100%` }} />}
+              containerElement={<div style={{ height: `400px` }} />}
+              mapElement={<div style={{ height: `100%` }} />}
+            />
+          </div>
+        </div>
       </div>
     </section>
   </main>

@@ -9,7 +9,7 @@ export const IndexPageTemplate = ({
   maps
 }) => (
   <main>
-    <section className="section section--gradient">
+    <section className="section">
       <div className="container">
         <div className="section">
           <div className="columns">
