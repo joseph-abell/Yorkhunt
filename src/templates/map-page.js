@@ -33,7 +33,7 @@ export const MapPageTemplate = ({
               zoom={zoom}
               googleMapURL='https://maps.googleapis.com/maps/api/js?key=AIzaSyBoJCzx8150auuR_Ffkh7qr43e-2hRWg0A'
               loadingElement={<div style={{ height: `100%` }} />}
-              containerElement={<div style={{ height: `400px` }} />}
+              containerElement={<div style={{ height: `400px`, width: `100%` }} />}
               mapElement={<div style={{ height: `100%` }} />}
             />
           </div>
