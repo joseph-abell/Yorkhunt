@@ -1,32 +1,32 @@
-@import "~bulma/sass/utilities/initial-variables"
-
-// Config vars
-// Kaldi logo brand color: #FD461E
-$kaldi-red: #D64000
-$kaldi-red-invert: #fff
-
-$primary: $kaldi-red
-$primary-invert: $kaldi-red-invert
+$primary: #448825
+$primary-hover: #58B030
+$primary-invert: #fff
 $body-color: #333
-$black: #2b2523
+$black: #081A00
+$white: #ffffff
+
+@import "~bulma"
+
+body
+    background: $black
+    min-height: 100vh;
+
+main
+    background: $white
 
 .navbar .navbar-menu
   box-shadow:none !important
 
-.content .taglist
-  list-style: none
-  margin-bottom: 0
-  margin-left: 0
-  margin-right: 1.5rem
-  margin-top: 1.5rem
-  display: flex
-  flex-wrap: wrap
-  justify-content: left
-  align-items: center
-  li
-    padding: 0 2rem 1rem 0
-    margin-bottom: 1.5rem
-    margin-top: 0
+.navbar-brand .navbar-item
+  color: $primary
+  text-transform: uppercase
+  font-weight: bold
+  &:hover, &:active
+    color: $primary-hover
+
+.navbar-burger
+  border: 0;
+  background: none;
 
 // Helper Classes
 .full-width-image-container
@@ -80,19 +80,23 @@ $black: #2b2523
   fill: currentColor
 .navbar-brand .navbar-item.logo
   padding: 0 1rem
+
 footer.footer
-  padding: 3rem 0rem 0rem
+  padding: 3rem 0rem
   background-color: transparent
+footer a
+  color: $primary
+footer a:hover
+  color: $primary-invert
 
 //Menu overrides
-$menu-item-color: $white-ter
+$menu-item-color: $white
 $menu-item-hover-color: $black !important
 $menu-item-hover-background-color: $black
-$menu-item-active-color: $kaldi-red-invert
-$menu-item-active-background-color:	$kaldi-red-invert
-$menu-list-border-left: 1px solid $kaldi-red-invert
-$menu-label-color: $white-ter
-
+$menu-item-active-color: $primary-invert
+$menu-item-active-background-color:	$primary-invert
+$menu-list-border-left: 1px solid $primary-invert
+$menu-label-color: $white
 
 .menu-label
   font-size: 1em !important
@@ -100,41 +104,3 @@ $menu-label-color: $white-ter
 .menu-list
   list-style: none !important
   text-align: left
-.social
-  padding: 2em
-.social a
-    padding: .5em .5em .3em .5em
-    border-radius: 1em
-    background-color: $white-ter
-    margin: .5em
-    width: 1em
-    height: 1em
-    vertical-align: middle
-    display: inline
-
-// blog roll
-.blog-list-item.is-featured
-  background-color: #d6400033;
-.blog-list-item header
-  display: flex;
-  margin-bottom: 1em;
-.blog-list-item .featured-thumbnail
-  flex-basis: 35%;
-  margin: 0 1.5em 0 0;
-
-
-@import "~bulma"
-
-
-// responsiveness
-+tablet-only
-  .blog-list-item .featured-thumbnail
-    flex-basis: 50%;
-
-+mobile
-  .blog-list-item header
-    display: block
-  .blog-list-item .featured-thumbnail
-    text-align: center;
-    max-width: 70%;
-    margin: 0 0 1em;
