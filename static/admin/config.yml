@@ -29,6 +29,7 @@ collections:
     fields:
         - {label: 'Template Key', name: 'templateKey', widget: 'hidden', default: 'map-page'}
         - {label: 'Title', name: 'title', widget: 'string'}
+        - {label: 'Description', name: 'deck', widget: markdown}
         - {label: 'Latitude', name: 'lat', widget: 'string'}
         - {label: 'Longitude', name: 'lng', widget: 'string'}
         - {label: 'Zoom', name: 'zoom', widget: string}

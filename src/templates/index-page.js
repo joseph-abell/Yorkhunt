@@ -23,16 +23,22 @@ export const IndexPageTemplate = ({
                     <h3 className="subtitle">{mainpitch.description}</h3>
                   </div>
                   {maps && (
-                    <div className="tile">
-                      <ul>
-                        {maps.map(m => (
-                          <li key={m.slug}>
-                            <Link to={m.slug}>
-                              {m.title}
-                            </Link>
-                          </li>
-                        ))}
-                      </ul>
+                    <div>
+                      <div className="tile">
+                        <h2>Maps</h2>
+                      </div>
+                      <div className="tile">
+                        <ul>
+                          {maps.map(m => (
+                            <li key={m.slug}>
+                              <Link to={m.slug}>
+                                <h3>{m.title}</h3>
+                                <p>{m.deck}</p>
+                              </Link>
+                            </li>
+                          ))}
+                        </ul>
+                      </div>
                     </div>
                   )}
                 </div>
@@ -51,7 +57,14 @@ IndexPageTemplate.propTypes = {
 
 const IndexPage = ({ data }) => {
   const { frontmatter } = data.markdownRemark
-  const maps = data.maps.edges.map(m => ({ slug: m.node.fields.slug, lat: m.node.frontmatter.lat, lng: m.node.frontmatter.lng, title: m.node.frontmatter.title }));
+  const maps = data.maps.edges.map(m => {
+    const { frontmatter, fields } = m.node;
+
+    return ({
+      ...frontmatter,
+      ...fields
+    });
+  });
 
   return (
     <Layout>
@@ -68,7 +81,7 @@ IndexPage.propTypes = {
     markdownRemark: PropTypes.shape({
       frontmatter: PropTypes.object,
     }),
-    maps: PropTypes.array
+    maps: PropTypes.any
   }),
 }
 
@@ -92,6 +105,10 @@ export const pageQuery = graphql`
             lat
             lng
             title
+            deck
+            publishedDate
+            wheelchairAccessible
+            accessibilityNotes
           }
           fields {
             slug

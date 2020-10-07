@@ -1,36 +1,35 @@
 import React from 'react'
+import { GoogleMap, withScriptjs, withGoogleMap } from 'react-google-maps'
 import PropTypes from 'prop-types'
 import { graphql } from 'gatsby'
 
 import Layout from '../components/Layout'
 
+const MyMapComponent = withScriptjs(
+    withGoogleMap(
+      ({ zoom, lat, lng }) => (
+        <GoogleMap defaultZoom={zoom} defaultCenter={{ lat, lng }} />
+      )
+    )
+  )
+
 export const MapPageTemplate = ({
-  title,
   lat,
-  lng
+  lng,
+  zoom,
 }) => (
   <main>
     <section className="section section--gradient">
       <div className="container">
-        <div className="section">
-          <div className="columns">
-            <div className="column is-10 is-offset-1">
-              <div className="content">
-                <div className="content">
-                  <div className="tile">
-                    <h1 className="title">{title}</h1>
-                  </div>
-                  <div className="tile">
-                    <p>Latitude: {lat}</p>
-                  </div>
-                  <div className="tile">
-                    <p>Longitude: {lng}</p>
-                  </div>
-                </div>
-              </div>
-            </div>
-          </div>
-        </div>
+        <MyMapComponent
+          lat={lat}
+          lng={lng}
+          zoom={zoom}
+          googleMapURL='https://maps.googleapis.com/maps/api/js?key=AIzaSyBoJCzx8150auuR_Ffkh7qr43e-2hRWg0A'
+          loadingElement={<div style={{ height: `100%` }} />}
+          containerElement={<div style={{ height: `400px` }} />}
+          mapElement={<div style={{ height: `100%` }} />}
+        />
       </div>
     </section>
   </main>
@@ -40,17 +39,20 @@ MapPageTemplate.propTypes = {
   title: PropTypes.string,
   lat: PropTypes.string,
   lng: PropTypes.string,
+  url: PropTypes.string,
+  zoom: PropTypes.string,
 }
 
 const MapPage = ({ data }) => {
   const { frontmatter } = data.markdownRemark
-
+    console.log(frontmatter)
   return (
     <Layout>
       <MapPageTemplate
         title={frontmatter.title}
-        lat={frontmatter.lat}
-        lng={frontmatter.lng}
+        lat={Number.parseFloat(frontmatter.lat)}
+        lng={Number.parseFloat(frontmatter.lng)}
+        zoom={Number.parseInt(frontmatter.zoom)}
       />
     </Layout>
   )
@@ -73,6 +75,7 @@ export const pageQuery = graphql`
         title
         lat
         lng
+        zoom
       }
     }
   }
