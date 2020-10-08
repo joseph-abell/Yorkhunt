@@ -88,10 +88,30 @@ footer.footer
 footer .content
   padding: .5rem .75rem
 
-a
+a,
+a.navbar-item,
+.navbar-link
   color: $primary
-a:hover
+
+a:hover,
+a:active,
+a.navbar-item:focus,
+a.navbar-item:focus-within,
+a.navbar-item:hover,
+a.navbar-item.is-active,
+.navbar-link:focus,
+.navbar-link:focus-within,
+.navbar-link:hover,
+.navbar-link.is-active
   color: $primary-hover
+
+form > div
+  margin-bottom: 20px
+  margin-top: 10px
+
+label
+  display: block
+  margin-bottom: 10px
 
 ul, .content ul, li
   list-style: none

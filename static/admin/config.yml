@@ -47,4 +47,8 @@ collections:
             - {label: 'Clue 1', name: 'clue1', widget: markdown, required: false}
             - {label: 'Clue 2', name: 'clue2', widget: markdown, required: false}
             - {label: 'Clue 3', name: 'clue3', widget: markdown, required: false}
+        - label: 'Credits'
+          name: 'credits'
+          widget: list
+          field: {label: 'Credit', name: credit, widget: string}
 
