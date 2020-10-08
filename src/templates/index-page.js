@@ -1,7 +1,7 @@
 import React from "react";
 import PropTypes from "prop-types";
 import { graphql, Link } from "gatsby";
-
+import Img from "gatsby-image/withIEPolyfill";
 import Layout from "../components/Layout";
 
 export const IndexPageTemplate = ({ mainpitch, maps }) => (
@@ -20,14 +20,20 @@ export const IndexPageTemplate = ({ mainpitch, maps }) => (
           <div className="content">
             <div className="tile">
               <ul>
-                {maps.map((m) => (
-                  <li key={m.slug}>
-                    <Link to={m.slug}>
-                      <h3>{m.title}</h3>
-                      <p>{m.deck}</p>
-                    </Link>
-                  </li>
-                ))}
+                {maps.map((m) => {
+                  return (
+                    <li key={m.slug} className="homepage-map">
+                      <Link to={m.slug}>
+                        <Img
+                          fixed={m.featuredImage.childImageSharp.fixed}
+                          objectFit="cover"
+                          objectPosition="50% 50%"
+                        />
+                        <h3>{m.title}</h3>
+                      </Link>
+                    </li>
+                  );
+                })}
               </ul>
             </div>
           </div>
@@ -91,6 +97,14 @@ export const pageQuery = graphql`
             lng
             title
             deck
+            featuredImage {
+              childImageSharp {
+                fixed(width: 300, height: 300) {
+                  ...GatsbyImageSharpFixed
+                }
+              }
+              publicURL
+            }
             publishedDate
             wheelchairAccessible
             accessibilityNotes
