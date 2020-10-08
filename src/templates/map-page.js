@@ -24,14 +24,35 @@ export const MapPageTemplate = ({
           <div className="tile">
             <p>{deck}</p>
           </div>
-          <div className="tile" style={{ height: '400px' }}>
+
+          {markers.length > 0 && (
+            <>
+              <div className="tile">
+                <h2>Items</h2>
+              </div>
+              <div className="tile">
+                <ul>
+                  {markers.map((marker, index) => (
+                    <li key={marker.title}>
+                      #{index + 1}: {marker.title}
+                    </li>
+                  ))}
+                </ul>
+              </div>
+            </>
+          )}
+          <div className="tile" style={{ height: "400px" }}>
             <GoogleMapReact
-              bootstrapURLKeys={{ key: 'AIzaSyBoJCzx8150auuR_Ffkh7qr43e-2hRWg0A' }}
+              bootstrapURLKeys={{
+                key: "AIzaSyBoJCzx8150auuR_Ffkh7qr43e-2hRWg0A",
+              }}
               defaultZoom={zoom}
               defaultCenter={{ lat, lng }}
             >
               {markers.map((marker) => (
-                <div key={marker.title} lat={lat} lng={lng}>Pointer</div>
+                <div key={marker.title} lat={lat} lng={lng}>
+                  Pointer
+                </div>
               ))}
             </GoogleMapReact>
           </div>

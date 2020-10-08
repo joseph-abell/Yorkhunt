@@ -72,22 +72,16 @@ collections:
           - { label: "Latitude", name: "lat", widget: "string" }
           - { label: "Longitude", name: "lng", widget: "string" }
           - {
-              label: "Clue 1",
-              name: "clue1",
-              widget: markdown,
-              required: false,
-            }
-          - {
-              label: "Clue 2",
-              name: "clue2",
-              widget: markdown,
-              required: false,
-            }
-          - {
-              label: "Clue 3",
-              name: "clue3",
-              widget: markdown,
-              required: false,
+              label: "Clues",
+              name: clues,
+              widget: list,
+              field:
+                {
+                  label: "Clue",
+                  name: "clue",
+                  widget: markdown,
+                  required: false,
+                },
             }
       - label: "Credits"
         name: "credits"
