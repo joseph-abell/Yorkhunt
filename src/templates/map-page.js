@@ -1,6 +1,5 @@
 import React from 'react'
-import { GoogleMap, withScriptjs, withGoogleMap } from 'react-google-maps'
-import { MarkerWithLabel } from "react-google-maps/lib/components/addons/MarkerWithLabel";
+import { GoogleMap, withScriptjs, withGoogleMap, Marker } from 'react-google-maps'
 import PropTypes from 'prop-types'
 import { graphql } from 'gatsby'
 
@@ -21,7 +20,9 @@ export const MapPageTemplate = ({
   title,
   credits,
   markers,
-}) => (
+}) => {
+    console.log(markers);
+    return (
   <main>
     <section className="section">
       <div className="container">
@@ -40,9 +41,7 @@ export const MapPageTemplate = ({
               mapElement={<div style={{ height: `100%` }} />}
             >
                 {markers.map(marker => (
-                    <MarkerWithLabel key={marker.title} position={{ lat, lng }}>
-                        <div>{marker.title}</div>
-                    </MarkerWithLabel>
+                    <Marker key={marker.title} position={{ lat, lng }} />
                 ))}
             </MyMapComponent>
           </div>
@@ -64,7 +63,7 @@ export const MapPageTemplate = ({
       </div>
     </section>
   </main>
-)
+)}
 
 MapPageTemplate.propTypes = {
   title: PropTypes.string,
