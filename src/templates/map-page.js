@@ -1,5 +1,6 @@
 import React from 'react'
 import { GoogleMap, withScriptjs, withGoogleMap } from 'react-google-maps'
+import { MarkerWithLabel } from "react-google-maps/lib/components/addons/MarkerWithLabel";
 import PropTypes from 'prop-types'
 import { graphql } from 'gatsby'
 
@@ -18,6 +19,8 @@ export const MapPageTemplate = ({
   lng,
   zoom,
   title,
+  credits,
+  markers,
 }) => (
   <main>
     <section className="section">
@@ -35,8 +38,28 @@ export const MapPageTemplate = ({
               loadingElement={<div style={{ height: `100%` }} />}
               containerElement={<div style={{ height: `400px`, width: `100%` }} />}
               mapElement={<div style={{ height: `100%` }} />}
-            />
+            >
+                {markers.map(marker => (
+                    <MarkerWithLabel key={marker.title} position={{ lat, lng }}>
+                        <div>{marker.title}</div>
+                    </MarkerWithLabel>
+                ))}
+            </MyMapComponent>
           </div>
+          {credits.length > 0 && (
+            <>
+              <div className='tile'>
+                <h2 className='subtitle'>Credits</h2>
+              </div>
+              <div className='tile'>
+                <ul>
+                  {credits.map(credit => (
+                    <li key={credit}>{credit}</li>
+                  ))}
+                </ul>
+              </div>
+            </>
+          )}
         </div>
       </div>
     </section>
@@ -49,6 +72,8 @@ MapPageTemplate.propTypes = {
   lng: PropTypes.string,
   url: PropTypes.string,
   zoom: PropTypes.string,
+  credits: PropTypes.array,
+  markers: PropTypes.array,
 }
 
 const MapPage = ({ data }) => {
@@ -61,6 +86,8 @@ const MapPage = ({ data }) => {
         lat={Number.parseFloat(frontmatter.lat)}
         lng={Number.parseFloat(frontmatter.lng)}
         zoom={Number.parseInt(frontmatter.zoom)}
+        credits={frontmatter.credits}
+        markers={frontmatter.markers}
       />
     </Layout>
   )
@@ -84,6 +111,12 @@ export const pageQuery = graphql`
         lat
         lng
         zoom
+        credits
+        markers {
+          title
+          lat
+          lng
+        }
       }
     }
   }
