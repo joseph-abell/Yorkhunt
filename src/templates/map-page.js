@@ -1,9 +1,56 @@
-import React from "react";
+import React, { useState } from "react";
 import GoogleMapReact from "google-map-react";
 import PropTypes from "prop-types";
 import { graphql } from "gatsby";
 
 import Layout from "../components/Layout";
+
+const Marker = ({
+  marker,
+  i,
+  setComplete,
+  complete,
+  setShowClue,
+  showClue,
+}) => {
+  const onShowButton = () => {
+    setShowClue(showClue + 1);
+  };
+
+  const onToggleComplete = () => {
+    setShowClue(-1);
+    setComplete(!complete);
+  };
+
+  return (
+    <li
+      key={marker.title}
+      className={`marker ${complete === true ? "complete" : ""}`}
+    >
+      {i + 1}: {marker.title}
+      {marker?.clues?.length > 0 && (
+        <button
+          type="button"
+          onClick={onShowButton}
+          disabled={showClue >= marker.clues.length - 1 || complete}
+        >
+          Show Clue
+        </button>
+      )}
+      <button type="button" onClick={onToggleComplete}>
+        {!complete && "Found"}
+        {complete && "Not Found"}
+      </button>
+      <ul className="clues">
+        {marker?.clues.map((clue, index) => (
+          <li key={clue} className={showClue < index ? "hidden" : ""}>
+            {index + 1}: {clue}
+          </li>
+        ))}
+      </ul>
+    </li>
+  );
+};
 
 export const MapPageTemplate = ({
   lat,
@@ -13,78 +60,77 @@ export const MapPageTemplate = ({
   deck,
   credits,
   markers,
-}) => (
-  <main>
-    <section className="section">
-      <div className="container">
-        <div className="content">
-          <div className="tile">
-            <h1 className="title">{title}</h1>
-          </div>
-          <div className="tile">
-            <p>{deck}</p>
-          </div>
+}) => {
+  const [showClue, setShowClue] = useState(-1);
+  const [complete, setComplete] = useState(false);
+  return (
+    <main>
+      <section className="section">
+        <div className="container">
+          <div className="content">
+            <div className="tile">
+              <h1 className="title">{title}</h1>
+            </div>
+            <div className="tile">
+              <p>{deck}</p>
+            </div>
 
-          {markers.length > 0 && (
-            <>
-              <div className="tile">
-                <h2>Items</h2>
-              </div>
-              <div className="tile">
-                <ul>
-                  {markers.map((marker, index) => (
-                    <li key={marker.title}>
-                      #{index + 1}: {marker.title}
-                    </li>
-                  ))}
-                </ul>
-              </div>
-            </>
-          )}
-          <div className="tile" style={{ height: "400px" }}>
-            <GoogleMapReact
-              bootstrapURLKeys={{
-                key: "AIzaSyBoJCzx8150auuR_Ffkh7qr43e-2hRWg0A",
-              }}
-              defaultZoom={zoom}
-              defaultCenter={{ lat, lng }}
-            >
-              {markers.map((marker) => (
-                <div key={marker.title} lat={lat} lng={lng}>
-                  Pointer
+            {markers.length > 0 && (
+              <>
+                <div className="tile">
+                  <h2>Items</h2>
                 </div>
-              ))}
-            </GoogleMapReact>
+                <div className="tile">
+                  <ul>
+                    {markers.map((marker, index) => (
+                      <Marker
+                        marker={marker}
+                        key={marker.title}
+                        i={index}
+                        showClue={showClue}
+                        setShowClue={setShowClue}
+                        complete={complete}
+                        setComplete={setComplete}
+                      />
+                    ))}
+                  </ul>
+                </div>
+              </>
+            )}
+            <div className="tile" style={{ height: "400px" }}>
+              <GoogleMapReact
+                bootstrapURLKeys={{
+                  key: "AIzaSyBoJCzx8150auuR_Ffkh7qr43e-2hRWg0A",
+                }}
+                defaultZoom={zoom}
+                defaultCenter={{ lat, lng }}
+              >
+                {markers.map((marker) => (
+                  <div key={marker.title} lat={lat} lng={lng}>
+                    Pointer
+                  </div>
+                ))}
+              </GoogleMapReact>
+            </div>
+            {credits.length > 0 && (
+              <>
+                <div className="tile">
+                  <h2 className="subtitle">Credits</h2>
+                </div>
+                <div className="tile">
+                  <ul>
+                    {credits.map((credit) => (
+                      <li key={credit}>{credit}</li>
+                    ))}
+                  </ul>
+                </div>
+              </>
+            )}
           </div>
-          {credits.length > 0 && (
-            <>
-              <div className="tile">
-                <h2 className="subtitle">Credits</h2>
-              </div>
-              <div className="tile">
-                <ul>
-                  {credits.map((credit) => (
-                    <li key={credit}>{credit}</li>
-                  ))}
-                </ul>
-              </div>
-            </>
-          )}
         </div>
-      </div>
-    </section>
-  </main>
-);
-
-MapPageTemplate.propTypes = {
-  title: PropTypes.string,
-  deck: PropTypes.string,
-  lat: PropTypes.string,
-  lng: PropTypes.string,
-  url: PropTypes.string,
-  zoom: PropTypes.string,
-  credits: PropTypes.array,
-  markers: PropTypes.array,
+      </section>
+    </main>
+  );
 };
 
 const MapPage = ({ data }) => {
@@ -129,6 +175,7 @@ export const pageQuery = graphql`
           title
           lat
           lng
+          clues
         }
       }
     }

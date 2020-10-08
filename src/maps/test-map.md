@@ -19,7 +19,7 @@ markers:
     clues:
       - Clue 1
       - Clue 2
-      - Clue
+      - Clue 3
 credits:
   - Map by Joseph Abell
 ---
