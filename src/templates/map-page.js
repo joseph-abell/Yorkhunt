@@ -42,8 +42,8 @@ const Marker = ({
         </button>
       )}
       <button type="button" onClick={() => onToggleComplete(i)}>
-        {!complete && "Found"}
-        {complete && "Not Found"}
+        {!complete[i] && "Found"}
+        {complete[i] && "Not Found"}
       </button>
       <ul className="clues">
         {marker?.clues.map((clue, index) => (
@@ -118,7 +118,7 @@ export const MapPageTemplate = ({
                     lat={lat}
                     lng={lng}
                     className={`marker-pointer ${
-                      complete[i + 1] ? "complete" : undefined
+                      complete[i] ? "complete" : undefined
                     }s`}
                   >
                     Pointer
