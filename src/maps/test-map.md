@@ -16,6 +16,10 @@ markers:
     clue1: This is the first clue.
     clue2: This is the second clue.
     clue3: This is the third clue.
+    clues:
+      - Clue 1
+      - Clue 2
+      - Clue
 credits:
   - Map by Joseph Abell
 ---
