@@ -1,36 +1,7 @@
-import React, { useState } from 'react';
-import { navigate } from 'gatsby-link'
+import React from 'react';
 import Layout from '../components/Layout'
 
-function encode(data) {
-    return Object.keys(data)
-      .map((key) => encodeURIComponent(key) + '=' + encodeURIComponent(data[key]))
-      .join('&')
-  }
-
-const Contribute = () => {
-  const [formState, setFormState] = useState({});
-
-  const handleChange = (e) => {
-      setFormState({ ...formState, [e.target.name]: e.target.value })
-  }
-
-  const handleSubmit = (e) => {
-    e.preventDefault()
-    const form = e.target
-    fetch('/', {
-      method: 'POST',
-      headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
-      body: encode({
-        'form-name': form.getAttribute('name'),
-        ...formState,
-      }),
-    })
-      .then(() => navigate(form.getAttribute('action')))
-      .catch((error) => alert(error))
-  }
-
-  return (
+const Contribute = () => (
   <Layout>
     <main>
       <section className="section">
@@ -44,7 +15,6 @@ const Contribute = () => {
               data-netlify="true"
               data-netlify-honeypot="bot-field"
               action='/contribute-success/'
-              onSubmit={handleSubmit}
             >
               <input type="hidden" name="form-name" value="suggest-map" />
 
@@ -52,13 +22,13 @@ const Contribute = () => {
                 <label htmlFor='botField'>
                   Don’t fill this out:
                 </label>
-                <input name="bot-field" id='botField' onChange={handleChange} />
+                <input name="bot-field" id='botField' />
               </p>
             
               <div>
                 <p>
                   <label htmlFor='name'>Name: * (Used for credits)</label>
-                  <input id='name' type='text' style={{ borderRadius: '4px', border: '1px solid #bbb', padding: '7px' }} onChange={handleChange} />
+                  <input id='name' name='name' type='text' style={{ borderRadius: '4px', border: '1px solid #bbb', padding: '7px' }} />
                 </p>
               </div>
 
@@ -66,14 +36,14 @@ const Contribute = () => {
                 <p>
                   <label htmlFor='contribution'>Contribution: *</label>
                 
-                  <textarea id='contribution' style={{ minWidth: '245px', minHeight: '100px', borderRadius: '4px', border: '1px solid #bbb' }} onChange={handleChange} />
+                  <textarea id='contribution' name='contribution' style={{ minWidth: '245px', minHeight: '100px', borderRadius: '4px', border: '1px solid #bbb', padding: '7px' }}  />
                 </p>
               </div>
 
               <div>
                 <p>
                   <label htmlFor='email'>Email: * (Used to let you know when your contribution has made it on to the site)</label>
-                  <input id='email' type='email' style={{ borderRadius: '4px', border: '1px solid #bbb', padding: '7px' }} onChange={handleChange} />
+                  <input id='email' type='email' name='email' style={{ borderRadius: '4px', border: '1px solid #bbb', padding: '7px' }} />
                 </p>
               </div>
 
@@ -86,6 +56,6 @@ const Contribute = () => {
       </section>
     </main>
   </Layout>
-)}
+)
 
 export default Contribute;

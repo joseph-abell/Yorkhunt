@@ -8,7 +8,7 @@ const ContributeSuccess = () => (
         <div className="container">
           <div className='content'>
             <h2 className='subtitle'>Success</h2>
-            <p>Thank you gfor your contribution!</p>
+            <p>Thank you for your contribution!</p>
           </div>
         </div>
       </section>
