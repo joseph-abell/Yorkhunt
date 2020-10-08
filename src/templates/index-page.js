@@ -11,41 +11,30 @@ export const IndexPageTemplate = ({
   <main>
     <section className="section">
       <div className="container">
-        <div className="section">
-          <div className="columns">
-            <div className="column is-10 is-offset-1">
-              <div className="content">
-                <div className="content">
-                  <div className="tile">
-                    <h1 className="title">{mainpitch.title}</h1>
-                  </div>
-                  <div className="tile">
-                    <h3 className="subtitle">{mainpitch.description}</h3>
-                  </div>
-                  {maps && (
-                    <div>
-                      <div className="tile">
-                        <h2>Maps</h2>
-                      </div>
-                      <div className="tile">
-                        <ul>
-                          {maps.map(m => (
-                            <li key={m.slug}>
-                              <Link to={m.slug}>
-                                <h3>{m.title}</h3>
-                                <p>{m.deck}</p>
-                              </Link>
-                            </li>
-                          ))}
-                        </ul>
-                      </div>
-                    </div>
-                  )}
-                </div>
-              </div>
-            </div>
+        <div className="content">
+          <div className="tile">
+            <h1 className="title">{mainpitch.title}</h1>
+          </div>
+          <div className="tile">
+            <p>{mainpitch.description}</p>
           </div>
         </div>
+        {maps && (
+          <div className='content'>
+            <div className="tile">
+              <ul>
+                {maps.map(m => (
+                  <li key={m.slug}>
+                    <Link to={m.slug}>
+                      <h3>{m.title}</h3>
+                      <p>{m.deck}</p>
+                    </Link>
+                  </li>
+                ))}
+              </ul>
+            </div>
+          </div>
+        )}
       </div>
     </section>
   </main>

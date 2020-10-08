@@ -1,7 +1,7 @@
 ---
 templateKey: index-page
 mainpitch:
-  title: York Treasure Hunt Maps
+  title: York Treasure Hunts
   description: >
-    Family friendly maps and guides to explore York
+    Family friendly treasure hunts to explore York, UK. Community suggestions and improvements welcome.
 ---
