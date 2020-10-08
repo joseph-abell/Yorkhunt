@@ -17,15 +17,19 @@ const Marker = ({
     setShowClue(showClue + 1);
   };
 
-  const onToggleComplete = () => {
+  const onToggleComplete = (i) => {
+    const newComplete = [...complete];
+    newComplete[i] = !newComplete[i];
+
+    setComplete(newComplete);
+
     setShowClue(-1);
-    setComplete(!complete);
   };
 
   return (
     <li
       key={marker.title}
-      className={`marker ${complete === true ? "complete" : ""}`}
+      className={`marker ${complete[i] === true ? "complete" : ""}`}
     >
       {i + 1}: {marker.title}
       {marker?.clues?.length > 0 && (
@@ -37,7 +41,7 @@ const Marker = ({
           Show Clue
         </button>
       )}
-      <button type="button" onClick={onToggleComplete}>
+      <button type="button" onClick={() => onToggleComplete(i)}>
         {!complete && "Found"}
         {complete && "Not Found"}
       </button>
@@ -62,7 +66,8 @@ export const MapPageTemplate = ({
   markers,
 }) => {
   const [showClue, setShowClue] = useState(-1);
-  const [complete, setComplete] = useState(false);
+  const [complete, setComplete] = useState(markers.map(() => false));
+
   return (
     <main>
       <section className="section">
@@ -82,17 +87,19 @@ export const MapPageTemplate = ({
                 </div>
                 <div className="tile">
                   <ul>
-                    {markers.map((marker, index) => (
-                      <Marker
-                        marker={marker}
-                        key={marker.title}
-                        i={index}
-                        showClue={showClue}
-                        setShowClue={setShowClue}
-                        complete={complete}
-                        setComplete={setComplete}
-                      />
-                    ))}
+                    {markers.map((marker, index) => {
+                      return (
+                        <Marker
+                          marker={marker}
+                          key={marker.title}
+                          i={index}
+                          showClue={showClue}
+                          setShowClue={setShowClue}
+                          complete={complete}
+                          setComplete={setComplete}
+                        />
+                      );
+                    })}
                   </ul>
                 </div>
               </>
@@ -105,8 +112,15 @@ export const MapPageTemplate = ({
                 defaultZoom={zoom}
                 defaultCenter={{ lat, lng }}
               >
-                {markers.map((marker) => (
-                  <div key={marker.title} lat={lat} lng={lng}>
+                {markers.map((marker, i) => (
+                  <div
+                    key={marker.title}
+                    lat={lat}
+                    lng={lng}
+                    className={`marker-pointer ${
+                      complete[i + 1] ? "complete" : undefined
+                    }s`}
+                  >
                     Pointer
                   </div>
                 ))}
