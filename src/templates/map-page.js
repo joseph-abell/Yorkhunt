@@ -1,20 +1,9 @@
 import React from "react";
-import {
-  GoogleMap,
-  withScriptjs,
-  withGoogleMap,
-  Marker,
-} from "react-google-maps";
+import GoogleMapReact from "google-map-react";
 import PropTypes from "prop-types";
 import { graphql } from "gatsby";
 
 import Layout from "../components/Layout";
-
-const MyMapComponent = withScriptjs(
-  withGoogleMap(({ zoom, lat, lng }) => (
-    <GoogleMap defaultZoom={zoom} defaultCenter={{ lat, lng }} />
-  ))
-);
 
 export const MapPageTemplate = ({
   lat,
@@ -35,22 +24,16 @@ export const MapPageTemplate = ({
           <div className="tile">
             <p>{deck}</p>
           </div>
-          <div className="tile">
-            <MyMapComponent
-              lat={lat}
-              lng={lng}
-              zoom={zoom}
-              googleMapURL="https://maps.googleapis.com/maps/api/js?key=AIzaSyBoJCzx8150auuR_Ffkh7qr43e-2hRWg0A"
-              loadingElement={<div style={{ height: `100%` }} />}
-              containerElement={
-                <div style={{ height: `400px`, width: `100%` }} />
-              }
-              mapElement={<div style={{ height: `100%` }} />}
+          <div className="tile" style={{ height: '400px' }}>
+            <GoogleMapReact
+              bootstrapURLKeys={{ key: 'AIzaSyBoJCzx8150auuR_Ffkh7qr43e-2hRWg0A' }}
+              defaultZoom={zoom}
+              defaultCenter={{ lat, lng }}
             >
               {markers.map((marker) => (
-                <Marker key={marker.title} position={{ lat, lng }} />
+                <div key={marker.title} lat={lat} lng={lng}>Pointer</div>
               ))}
-            </MyMapComponent>
+            </GoogleMapReact>
           </div>
           {credits.length > 0 && (
             <>
