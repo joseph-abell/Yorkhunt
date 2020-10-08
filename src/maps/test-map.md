@@ -13,6 +13,9 @@ markers:
   - title: Test Marker
     lat: "53.959353"
     lng: "-1.085083"
+    clue1: This is the first clue.
+    clue2: This is the second clue.
+    clue3: This is the third clue.
 credits:
   - Map by Joseph Abell
 ---
