@@ -2,11 +2,11 @@ backend:
   name: git-gateway
   branch: master
   commit_messages:
-    create: 'Create {{collection}} “{{slug}}”'
-    update: 'Update {{collection}} “{{slug}}”'
-    delete: 'Delete {{collection}} “{{slug}}”'
-    uploadMedia: '[skip ci] Upload “{{path}}”'
-    deleteMedia: '[skip ci] Delete “{{path}}”'
+    create: "Create {{collection}} “{{slug}}”"
+    update: "Update {{collection}} “{{slug}}”"
+    delete: "Delete {{collection}} “{{slug}}”"
+    uploadMedia: "[skip ci] Upload “{{path}}”"
+    deleteMedia: "[skip ci] Delete “{{path}}”"
 
 media_folder: static/img
 public_folder: /img
@@ -19,36 +19,77 @@ collections:
         label: "Landing Page"
         name: "index"
         fields:
-          - {label: "Template Key", name: "templateKey", widget: "hidden", default: "index-page"}
-          - {label: Mainpitch, name: mainpitch, widget: object, fields: [{label: Title, name: title, widget: string}, {label: Description, name: description, widget: text}]}
+          - {
+              label: "Template Key",
+              name: "templateKey",
+              widget: "hidden",
+              default: "index-page",
+            }
+          - {
+              label: Mainpitch,
+              name: mainpitch,
+              widget: object,
+              fields:
+                [
+                  { label: Title, name: title, widget: string },
+                  { label: Description, name: description, widget: text },
+                ],
+            }
   - name: "maps"
     label: "Maps"
     folder: "src/maps"
     create: true
-    identifier_field: 'title'
+    identifier_field: "title"
     fields:
-        - {label: 'Template Key', name: 'templateKey', widget: 'hidden', default: 'map-page'}
-        - {label: 'Title', name: 'title', widget: 'string'}
-        - {label: 'Description', name: 'deck', widget: markdown}
-        - {label: 'Homepage Image', name: featuredImage, widget: image}
-        - {label: 'Latitude', name: 'lat', widget: 'string'}
-        - {label: 'Longitude', name: 'lng', widget: 'string'}
-        - {label: 'Zoom', name: 'zoom', widget: string}
-        - {label: 'Published Date', name: 'publishedDate', widget: 'date'}
-        - {label: 'Wheelchair Accessible', name: 'wheelchairAccessible', widget: string}
-        - {label: 'Accessibility Notes', name: 'accessibilityNotes', widget: markdown}
-        - label: 'Markers'
-          name: 'markers'
-          widget: 'list'
-          fields:
-            - {label: 'Title', name: 'title', widget: string}
-            - {label: 'Latitude', name: 'lat', widget: 'string'}
-            - {label: 'Longitude', name: 'lng', widget: 'string'}
-            - {label: 'Clue 1', name: 'clue1', widget: markdown, required: false}
-            - {label: 'Clue 2', name: 'clue2', widget: markdown, required: false}
-            - {label: 'Clue 3', name: 'clue3', widget: markdown, required: false}
-        - label: 'Credits'
-          name: 'credits'
-          widget: list
-          field: {label: 'Credit', name: credit, widget: string}
-
+      - {
+          label: "Template Key",
+          name: "templateKey",
+          widget: "hidden",
+          default: "map-page",
+        }
+      - { label: "Title", name: "title", widget: "string" }
+      - { label: "Description", name: "deck", widget: markdown }
+      - { label: "Homepage Image", name: featuredImage, widget: image }
+      - { label: "Latitude", name: "lat", widget: "string" }
+      - { label: "Longitude", name: "lng", widget: "string" }
+      - { label: "Zoom", name: "zoom", widget: string }
+      - { label: "Published Date", name: "publishedDate", widget: "date" }
+      - {
+          label: "Wheelchair Accessible",
+          name: "wheelchairAccessible",
+          widget: string,
+        }
+      - {
+          label: "Accessibility Notes",
+          name: "accessibilityNotes",
+          widget: markdown,
+        }
+      - label: "Markers"
+        name: "markers"
+        widget: "list"
+        fields:
+          - { label: "Title", name: "title", widget: string }
+          - { label: "Latitude", name: "lat", widget: "string" }
+          - { label: "Longitude", name: "lng", widget: "string" }
+          - {
+              label: "Clue 1",
+              name: "clue1",
+              widget: markdown,
+              required: false,
+            }
+          - {
+              label: "Clue 2",
+              name: "clue2",
+              widget: markdown,
+              required: false,
+            }
+          - {
+              label: "Clue 3",
+              name: "clue3",
+              widget: markdown,
+              required: false,
+            }
+      - label: "Credits"
+        name: "credits"
+        widget: list
+        field: { label: "Credit", name: credit, widget: string }

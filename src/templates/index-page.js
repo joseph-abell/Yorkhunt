@@ -1,13 +1,10 @@
-import React from 'react'
-import PropTypes from 'prop-types'
-import { graphql, Link } from 'gatsby'
+import React from "react";
+import PropTypes from "prop-types";
+import { graphql, Link } from "gatsby";
 
-import Layout from '../components/Layout'
+import Layout from "../components/Layout";
 
-export const IndexPageTemplate = ({
-  mainpitch,
-  maps
-}) => (
+export const IndexPageTemplate = ({ mainpitch, maps }) => (
   <main>
     <section className="section">
       <div className="container">
@@ -20,10 +17,10 @@ export const IndexPageTemplate = ({
           </div>
         </div>
         {maps && (
-          <div className='content'>
+          <div className="content">
             <div className="tile">
               <ul>
-                {maps.map(m => (
+                {maps.map((m) => (
                   <li key={m.slug}>
                     <Link to={m.slug}>
                       <h3>{m.title}</h3>
@@ -38,43 +35,40 @@ export const IndexPageTemplate = ({
       </div>
     </section>
   </main>
-)
+);
 
 IndexPageTemplate.propTypes = {
   mainpitch: PropTypes.object,
-}
+};
 
 const IndexPage = ({ data }) => {
-  const { frontmatter } = data.markdownRemark
-  const maps = data.maps.edges.map(m => {
+  const { frontmatter } = data.markdownRemark;
+  const maps = data.maps.edges.map((m) => {
     const { frontmatter, fields } = m.node;
 
-    return ({
+    return {
       ...frontmatter,
-      ...fields
-    });
+      ...fields,
+    };
   });
 
   return (
     <Layout>
-      <IndexPageTemplate
-        mainpitch={frontmatter.mainpitch}
-        maps={maps}
-      />
+      <IndexPageTemplate mainpitch={frontmatter.mainpitch} maps={maps} />
     </Layout>
-  )
-}
+  );
+};
 
 IndexPage.propTypes = {
   data: PropTypes.shape({
     markdownRemark: PropTypes.shape({
       frontmatter: PropTypes.object,
     }),
-    maps: PropTypes.any
+    maps: PropTypes.any,
   }),
-}
+};
 
-export default IndexPage
+export default IndexPage;
 
 export const pageQuery = graphql`
   query IndexPageTemplate {
@@ -87,7 +81,9 @@ export const pageQuery = graphql`
       }
     }
 
-    maps: allMarkdownRemark(filter: {frontmatter: {templateKey: {eq: "map-page"}}}) {
+    maps: allMarkdownRemark(
+      filter: { frontmatter: { templateKey: { eq: "map-page" } } }
+    ) {
       edges {
         node {
           frontmatter {
@@ -106,4 +102,4 @@ export const pageQuery = graphql`
       }
     }
   }
-`
+`;

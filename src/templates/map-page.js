@@ -1,28 +1,30 @@
-import React from 'react'
-import { GoogleMap, withScriptjs, withGoogleMap, Marker } from 'react-google-maps'
-import PropTypes from 'prop-types'
-import { graphql } from 'gatsby'
+import React from "react";
+import {
+  GoogleMap,
+  withScriptjs,
+  withGoogleMap,
+  Marker,
+} from "react-google-maps";
+import PropTypes from "prop-types";
+import { graphql } from "gatsby";
 
-import Layout from '../components/Layout'
+import Layout from "../components/Layout";
 
 const MyMapComponent = withScriptjs(
-    withGoogleMap(
-      ({ zoom, lat, lng }) => (
-        <GoogleMap defaultZoom={zoom} defaultCenter={{ lat, lng }} />
-      )
-    )
-  )
+  withGoogleMap(({ zoom, lat, lng }) => (
+    <GoogleMap defaultZoom={zoom} defaultCenter={{ lat, lng }} />
+  ))
+);
 
 export const MapPageTemplate = ({
   lat,
   lng,
   zoom,
   title,
+  deck,
   credits,
   markers,
-}) => {
-    console.log(markers);
-    return (
+}) => (
   <main>
     <section className="section">
       <div className="container">
@@ -31,28 +33,33 @@ export const MapPageTemplate = ({
             <h1 className="title">{title}</h1>
           </div>
           <div className="tile">
+            <p>{deck}</p>
+          </div>
+          <div className="tile">
             <MyMapComponent
               lat={lat}
               lng={lng}
               zoom={zoom}
-              googleMapURL='https://maps.googleapis.com/maps/api/js?key=AIzaSyBoJCzx8150auuR_Ffkh7qr43e-2hRWg0A'
+              googleMapURL="https://maps.googleapis.com/maps/api/js?key=AIzaSyBoJCzx8150auuR_Ffkh7qr43e-2hRWg0A"
               loadingElement={<div style={{ height: `100%` }} />}
-              containerElement={<div style={{ height: `400px`, width: `100%` }} />}
+              containerElement={
+                <div style={{ height: `400px`, width: `100%` }} />
+              }
               mapElement={<div style={{ height: `100%` }} />}
             >
-                {markers.map(marker => (
-                    <Marker key={marker.title} position={{ lat, lng }} />
-                ))}
+              {markers.map((marker) => (
+                <Marker key={marker.title} position={{ lat, lng }} />
+              ))}
             </MyMapComponent>
           </div>
           {credits.length > 0 && (
             <>
-              <div className='tile'>
-                <h2 className='subtitle'>Credits</h2>
+              <div className="tile">
+                <h2 className="subtitle">Credits</h2>
               </div>
-              <div className='tile'>
+              <div className="tile">
                 <ul>
-                  {credits.map(credit => (
+                  {credits.map((credit) => (
                     <li key={credit}>{credit}</li>
                   ))}
                 </ul>
@@ -63,25 +70,27 @@ export const MapPageTemplate = ({
       </div>
     </section>
   </main>
-)}
+);
 
 MapPageTemplate.propTypes = {
   title: PropTypes.string,
+  deck: PropTypes.string,
   lat: PropTypes.string,
   lng: PropTypes.string,
   url: PropTypes.string,
   zoom: PropTypes.string,
   credits: PropTypes.array,
   markers: PropTypes.array,
-}
+};
 
 const MapPage = ({ data }) => {
-  const { frontmatter } = data.markdownRemark
+  const { frontmatter } = data.markdownRemark;
 
   return (
     <Layout>
       <MapPageTemplate
         title={frontmatter.title}
+        deck={frontmatter.deck}
         lat={Number.parseFloat(frontmatter.lat)}
         lng={Number.parseFloat(frontmatter.lng)}
         zoom={Number.parseInt(frontmatter.zoom)}
@@ -89,8 +98,8 @@ const MapPage = ({ data }) => {
         markers={frontmatter.markers}
       />
     </Layout>
-  )
-}
+  );
+};
 
 MapPage.propTypes = {
   data: PropTypes.shape({
@@ -98,7 +107,7 @@ MapPage.propTypes = {
       frontmatter: PropTypes.object,
     }),
   }),
-}
+};
 
 export default MapPage;
 
@@ -107,6 +116,7 @@ export const pageQuery = graphql`
     markdownRemark(frontmatter: { templateKey: { eq: "map-page" } }) {
       frontmatter {
         title
+        deck
         lat
         lng
         zoom
@@ -119,4 +129,4 @@ export const pageQuery = graphql`
       }
     }
   }
-`
+`;

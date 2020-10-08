@@ -1,13 +1,13 @@
-import React from 'react'
-import { Link } from 'gatsby'
+import React from "react";
+import { Link } from "gatsby";
 
 const Navbar = class extends React.Component {
   constructor(props) {
-    super(props)
+    super(props);
     this.state = {
       active: false,
-      navBarActiveClass: '',
-    }
+      navBarActiveClass: "",
+    };
   }
 
   toggleHamburger = () => {
@@ -21,14 +21,14 @@ const Navbar = class extends React.Component {
         // set the class in state for the navbar accordingly
         this.state.active
           ? this.setState({
-              navBarActiveClass: 'is-active',
+              navBarActiveClass: "is-active",
             })
           : this.setState({
-              navBarActiveClass: '',
-            })
+              navBarActiveClass: "",
+            });
       }
-    )
-  }
+    );
+  };
 
   render() {
     return (
@@ -58,17 +58,19 @@ const Navbar = class extends React.Component {
             className={`navbar-menu ${this.state.navBarActiveClass}`}
           >
             <div className="navbar-start has-text-centered">
-                <ul>
-                    <li className='navbar-item'>
-                      <Link className='navbar-link is-arrowless' to='/contribute'>Contribute</Link>
-                    </li>
-                </ul>
+              <ul>
+                <li className="navbar-item">
+                  <Link className="navbar-link is-arrowless" to="/contribute">
+                    Contribute
+                  </Link>
+                </li>
+              </ul>
             </div>
           </div>
         </div>
       </nav>
-    )
+    );
   }
-}
+};
 
-export default Navbar
+export default Navbar;
