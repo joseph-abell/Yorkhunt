@@ -41,6 +41,7 @@ export const IndexPageTemplate = ({ mainpitch, maps }) => (
                   })}
               </ul>
             </div>
+            <div style={{ clear: 'both'}} />
           </div>
         )}
       </div>

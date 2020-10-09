@@ -105,7 +105,7 @@ export const MapPageTemplate = ({
               </GoogleMapReact>
             </div>
             {markers.length > 0 && (
-              <div className="tile" style={{ clear: 'both' }}>
+              <div className="tile">
                 <ul>
                   {markers.map((marker, index) => {
                     return (
