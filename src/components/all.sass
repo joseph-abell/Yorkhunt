@@ -99,8 +99,21 @@ a.navbar-item,
   button
     margin-left: 20px
 
-.marker-pointer.complete
-  display: none
+.marker-pointer
+  width: 30px
+  height: 30px
+  margin-left: -15px
+  margin-top: -15px
+  border-radius: 40px
+  border: 4px solid $primary
+  background: white
+  color: $primary
+  text-align: center
+  padding-top: 1px
+  font-size: 18px
+  font-weight: bold
+  &.complete
+    display: none
 
 .content .clues
   margin-left: 20px
@@ -158,7 +171,8 @@ $menu-label-color: $white
   top: 0
   text-align: center
   width: 100%
-  background: $primary
+  background: rgba(68, 136, 37, 0.8)
   color: $white
   padding: 20px
-  margin: 0 !important
+  margin: 115px 0 !important
+  line-height: 30px;

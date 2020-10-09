@@ -36,7 +36,7 @@ const Marker = ({
         <button
           type="button"
           onClick={onShowButton}
-          disabled={showClue >= marker.clues.length - 1 || complete}
+          disabled={showClue >= marker.clues.length - 1 || complete[i]}
         >
           Show Clue
         </button>
@@ -46,7 +46,7 @@ const Marker = ({
         {complete[i] && "Not Found"}
       </button>
       <ul className="clues">
-        {marker?.clues.map((clue, index) => (
+        {marker?.clues?.map((clue, index) => (
           <li key={clue} className={showClue < index ? "hidden" : ""}>
             {index + 1}: {clue}
           </li>
@@ -76,35 +76,33 @@ export const MapPageTemplate = ({
             <div className="tile">
               <h1 className="title">{title}</h1>
             </div>
-            <div className="tile">
-              <p>{deck}</p>
-            </div>
-
+            <div className="tile" style={{ marginBottom: '40px' }}>{deck}</div>
             {markers.length > 0 && (
-              <>
-                <div className="tile">
-                  <h2>Items</h2>
-                </div>
-                <div className="tile">
-                  <ul>
-                    {markers.map((marker, index) => {
-                      return (
-                        <Marker
-                          marker={marker}
-                          key={marker.title}
-                          i={index}
-                          showClue={showClue}
-                          setShowClue={setShowClue}
-                          complete={complete}
-                          setComplete={setComplete}
-                        />
-                      );
-                    })}
-                  </ul>
-                </div>
-              </>
+              <div
+                className="tile"
+                style={{ float: "left", marginRight: "50px" }}
+              >
+                <ul>
+                  {markers.map((marker, index) => {
+                    return (
+                      <Marker
+                        marker={marker}
+                        key={marker.title}
+                        i={index}
+                        showClue={showClue}
+                        setShowClue={setShowClue}
+                        complete={complete}
+                        setComplete={setComplete}
+                      />
+                    );
+                  })}
+                </ul>
+              </div>
             )}
-            <div className="tile" style={{ height: "400px" }}>
+            <div
+              className="tile"
+              style={{ height: "400px", width: "50%", marginBottom: "30px" }}
+            >
               <GoogleMapReact
                 bootstrapURLKeys={{
                   key: "AIzaSyBoJCzx8150auuR_Ffkh7qr43e-2hRWg0A",
@@ -115,20 +113,20 @@ export const MapPageTemplate = ({
                 {markers.map((marker, i) => (
                   <div
                     key={marker.title}
-                    lat={lat}
-                    lng={lng}
+                    lat={marker.lat}
+                    lng={marker.lng}
                     className={`marker-pointer ${
                       complete[i] ? "complete" : undefined
-                    }s`}
+                    }`}
                   >
-                    Pointer
+                    {i + 1}
                   </div>
                 ))}
               </GoogleMapReact>
             </div>
             {credits.length > 0 && (
               <>
-                <div className="tile">
+                <div className="tile" style={{ clear: "both" }}>
                   <h2 className="subtitle">Credits</h2>
                 </div>
                 <div className="tile">

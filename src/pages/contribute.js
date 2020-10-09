@@ -9,8 +9,9 @@ const Contribute = () => (
           <div className="content">
             <h2 className="subtitle">Contribute</h2>
             <p>
-              Got an idea for a new treasure map? Seen a mistake? Let us know,
-              and we will give you credit when your contribution makes it in.
+              Got an idea for a new treasure map? Seen a mistake? Missing a
+              clue? Let us know, and we will give you credit when your
+              contribution makes it in.
             </p>
             <form
               name="suggest-map"
