@@ -76,11 +76,11 @@ export const MapPageTemplate = ({
             <div className="tile">
               <h1 className="title">{title}</h1>
             </div>
-            <div className="tile" style={{ marginBottom: '40px' }}>{deck}</div>
+            <div className="tile" style={{ marginBottom: "40px" }}>
+              {deck}
+            </div>
             {markers.length > 0 && (
-              <div
-                className="tile"
-              >
+              <div className="tile">
                 <ul>
                   {markers.map((marker, index) => {
                     return (
