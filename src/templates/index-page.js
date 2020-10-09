@@ -20,20 +20,25 @@ export const IndexPageTemplate = ({ mainpitch, maps }) => (
           <div className="content">
             <div className="tile">
               <ul>
-                {maps.map((m) => {
-                  return (
-                    <li key={m.slug} className="homepage-map">
-                      <Link to={m.slug}>
-                        <Img
-                          fixed={m.featuredImage.childImageSharp.fixed}
-                          objectFit="cover"
-                          objectPosition="50% 50%"
-                        />
-                        <h3>{m.title}</h3>
-                      </Link>
-                    </li>
-                  );
-                })}
+                {maps
+                  .sort(
+                    (a, b) =>
+                      Date.parse(b.publishedDate) - Date.parse(a.publishedDate)
+                  )
+                  .map((m) => {
+                    return (
+                      <li key={m.slug} className="homepage-map">
+                        <Link to={m.slug}>
+                          <Img
+                            fixed={m.featuredImage.childImageSharp.fixed}
+                            objectFit="cover"
+                            objectPosition="50% 50%"
+                          />
+                          <h3>{m.title}</h3>
+                        </Link>
+                      </li>
+                    );
+                  })}
               </ul>
             </div>
           </div>

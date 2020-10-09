@@ -123,7 +123,7 @@ export const MapPageTemplate = ({
                 </ul>
               </div>
             )}
-            {credits.length > 0 && (
+            {credits?.length > 0 && (
               <>
                 <div className="tile">
                   <h2 className="subtitle">Credits</h2>
@@ -173,8 +173,8 @@ MapPage.propTypes = {
 export default MapPage;
 
 export const pageQuery = graphql`
-  query MapPageTemplate {
-    markdownRemark(frontmatter: { templateKey: { eq: "map-page" } }) {
+  query($id: String!) {
+    markdownRemark(id: { eq: $id }) {
       frontmatter {
         title
         deck
