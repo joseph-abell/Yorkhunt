@@ -80,7 +80,6 @@ export const MapPageTemplate = ({
             {markers.length > 0 && (
               <div
                 className="tile"
-                style={{ float: "left", marginRight: "50px" }}
               >
                 <ul>
                   {markers.map((marker, index) => {
@@ -101,7 +100,7 @@ export const MapPageTemplate = ({
             )}
             <div
               className="tile"
-              style={{ height: "400px", width: "50%", marginBottom: "30px" }}
+              style={{ height: "400px", marginBottom: "30px" }}
             >
               <GoogleMapReact
                 bootstrapURLKeys={{
@@ -126,7 +125,7 @@ export const MapPageTemplate = ({
             </div>
             {credits.length > 0 && (
               <>
-                <div className="tile" style={{ clear: "both" }}>
+                <div className="tile">
                   <h2 className="subtitle">Credits</h2>
                 </div>
                 <div className="tile">
