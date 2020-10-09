@@ -79,25 +79,6 @@ export const MapPageTemplate = ({
             <div className="tile" style={{ marginBottom: "40px" }}>
               {deck}
             </div>
-            {markers.length > 0 && (
-              <div className="tile">
-                <ul>
-                  {markers.map((marker, index) => {
-                    return (
-                      <Marker
-                        marker={marker}
-                        key={marker.title}
-                        i={index}
-                        showClue={showClue}
-                        setShowClue={setShowClue}
-                        complete={complete}
-                        setComplete={setComplete}
-                      />
-                    );
-                  })}
-                </ul>
-              </div>
-            )}
             <div
               className="tile"
               style={{ height: "400px", marginBottom: "30px" }}
@@ -123,6 +104,25 @@ export const MapPageTemplate = ({
                 ))}
               </GoogleMapReact>
             </div>
+            {markers.length > 0 && (
+              <div className="tile">
+                <ul>
+                  {markers.map((marker, index) => {
+                    return (
+                      <Marker
+                        marker={marker}
+                        key={marker.title}
+                        i={index}
+                        showClue={showClue}
+                        setShowClue={setShowClue}
+                        complete={complete}
+                        setComplete={setComplete}
+                      />
+                    );
+                  })}
+                </ul>
+              </div>
+            )}
             {credits.length > 0 && (
               <>
                 <div className="tile">
