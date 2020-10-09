@@ -1,7 +1,7 @@
 ---
 templateKey: map-page
 title: Cats
-deck: Cats Statue Party
+deck: Cats Statue Party - In progess, didn't have time to find them all
 featuredImage: /img/screenshot-from-2020-10-09-21-13-02.png
 lat: "53.979353"
 lng: "-1.085083"
