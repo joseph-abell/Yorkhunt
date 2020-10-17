@@ -1,6 +1,6 @@
 module.exports = {
   siteMetadata: {
-    title: "York Hunt",
+    title: "York Hunt - Treasure Hunts for York UK",
     description: "Family friendly treasure hunt maps for York, UK",
   },
   plugins: [

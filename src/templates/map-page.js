@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import GoogleMapReact from "google-map-react";
 import PropTypes from "prop-types";
+import { Helmet } from 'react-helmet';
 import { graphql } from "gatsby";
 
 import Layout from "../components/Layout";
@@ -69,6 +70,11 @@ export const MapPageTemplate = ({
   const [complete, setComplete] = useState(markers.map(() => false));
 
   return (
+    <>
+    <Helmet>
+      <title>{title} - York Hunt</title>
+      <meta name="description" content={deck} />
+    </Helmet>
     <main>
       <section className="section">
         <div className="container">
@@ -141,6 +147,7 @@ export const MapPageTemplate = ({
         </div>
       </section>
     </main>
+    </>
   );
 };
 

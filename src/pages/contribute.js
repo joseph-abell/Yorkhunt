@@ -1,8 +1,12 @@
 import React from "react";
+import { Helmet } from 'react-helmet';
 import Layout from "../components/Layout";
 
 const Contribute = () => (
   <Layout>
+    <Helmet>
+      <title>Contribute - York Hunt</title>
+    </Helmet>
     <main>
       <section className="section">
         <div className="container">
