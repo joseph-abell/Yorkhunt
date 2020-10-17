@@ -18,7 +18,6 @@ export const IndexPageTemplate = ({ mainpitch, maps }) => (
         </div>
         {maps && (
           <div className="content">
-            <div className="tile">
               <ul>
                 {maps
                   .sort(
@@ -29,20 +28,24 @@ export const IndexPageTemplate = ({ mainpitch, maps }) => (
                     return (
                       <li key={m.slug} className="homepage-map">
                         <Link to={m.slug}>
+                          <div className='floatLeft'>
+                          <h3>{m.title}</h3>
+                          <p>{m.deck}</p>
+                          </div>
+                          <div className='floatRight'>
                           <Img
                             fixed={m.featuredImage.childImageSharp.fixed}
                             objectFit="cover"
                             objectPosition="50% 50%"
                           />
-                          <h3>{m.title}</h3>
+                          </div>
+                          <div className='clearBoth' />
                         </Link>
                       </li>
                     );
                   })}
               </ul>
             </div>
-            <div style={{ clear: 'both'}} />
-          </div>
         )}
       </div>
     </section>

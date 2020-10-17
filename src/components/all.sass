@@ -164,23 +164,24 @@ $menu-label-color: $white
   text-align: left
 
 .homepage-map
-  position: relative
-  float: left
-  margin-right: 20px
+  border-bottom: 1px solid #ddd
   margin-bottom: 20px
+  padding-bottom: 15px
   margin-top: 0 !important
-
-.homepage-map h3
-  position: absolute
-  z-index: 20
-  top: 0
-  text-align: center
-  width: 300px
-  background: rgba(68, 136, 37, 0.8)
-  color: $white
-  padding: 20px
-  margin: 115px 0 !important
-  line-height: 30px;
+  h3
+    line-height: 30px
+    color: $primary
+  p
+    color: $body-color
 
 .section
   padding: 0.5rem 1.5rem
+
+.floatLeft
+  float: left
+
+.floatRight
+  float: right
+
+.clearBoth
+  clear: both

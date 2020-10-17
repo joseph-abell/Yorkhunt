@@ -1,7 +1,7 @@
 ---
 templateKey: map-page
-title: Cats
-deck: Cats Statue Party - In progess, didn't have time to find them all
+title: Cat Statue Party
+deck: All these cats are within walking distance, and should be wheelchair friendly.
 featuredImage: /img/cats.png
 lat: "53.959353"
 lng: "-1.085083"

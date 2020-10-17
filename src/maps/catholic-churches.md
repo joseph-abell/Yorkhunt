@@ -1,7 +1,7 @@
 ---
 templateKey: map-page
 title: Catholic Churches
-deck: Just in case you fancied a pilgrimage
+deck: Just in case you fancied a pilgrimage.
 featuredImage: /img/stwilfs.png
 lat: "53.979353"
 lng: "-1.085083"
